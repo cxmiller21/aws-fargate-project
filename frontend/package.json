@@ -6,6 +6,7 @@
     "build": "vue-cli-service build",
     "build:docker": "docker build -t vue-frontend .",
     "lint": "vue-cli-service lint",
+    "push:image": "./push_to_ecr.sh",
     "serve": "vue-cli-service serve",
     "serve:docker": "docker run -it -p 8080:80 --rm --name dockerize-vuejs-app-1 vue-frontend"
   },

@@ -23,13 +23,18 @@ data "aws_region" "current" {}
 ####################################################################
 # ECS Cluster Resources
 ####################################################################
+variable "cluster_name" {
+    type = string
+    default = "aws-fargate-project"
+}
+
 resource "aws_kms_key" "demo" {
   description             = "demo key for ECS cluster logging"
   deletion_window_in_days = 7
 }
 
 resource "aws_cloudwatch_log_group" "cluster" {
-  name = "${var.cluster_name}-logs"
+  name = "ecs-cluster-${var.cluster_name}"
 }
 
 resource "aws_ecs_cluster" "demo" {
@@ -51,5 +56,17 @@ resource "aws_ecs_cluster" "demo" {
         cloud_watch_log_group_name     = aws_cloudwatch_log_group.cluster.name
       }
     }
+  }
+}
+
+####################################################################
+# ECR Repo (push the frontend and backend docker images here)
+####################################################################
+resource "aws_ecr_repository" "main" {
+  name                 = var.fargate_project_name
+  image_tag_mutability = "MUTABLE"
+
+  image_scanning_configuration {
+    scan_on_push = true
   }
 }

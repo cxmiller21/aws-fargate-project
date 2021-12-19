@@ -1,4 +1,4 @@
-variable "cluster_name" {
+variable "fargate_project_name" {
     type = string
-    default = "aws-fargate-project-cluster"
+    default = "aws-fargate-project"
 }
