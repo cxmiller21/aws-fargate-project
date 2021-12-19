@@ -1,0 +1,10 @@
+{
+    "dependencies": {
+        "express":"*"
+    },
+    "scripts": {
+        "build:docker": "docker build -t node-backend .",
+        "start": "node server.js",
+        "start:docker": "docker run -it -p 3000:3000 --rm --name dockerize-node-app-1 node-backend"
+    }
+}
