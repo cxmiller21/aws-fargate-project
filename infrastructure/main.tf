@@ -21,49 +21,24 @@ data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
 ####################################################################
-# ECS Cluster Resources
+# ECS Cluster
 ####################################################################
-variable "cluster_name" {
-    type = string
-    default = "aws-fargate-project"
-}
-
-resource "aws_kms_key" "demo" {
-  description             = "demo key for ECS cluster logging"
-  deletion_window_in_days = 7
-}
-
-resource "aws_cloudwatch_log_group" "cluster" {
-  name = "ecs-cluster-${var.cluster_name}"
-}
-
-resource "aws_ecs_cluster" "demo" {
-  name = var.cluster_name
-
-  # collect, aggregate, and summarize metrics and logs from running containers
-  setting {
-    name  = "containerInsights"
-    value = "enabled"
-  }
-
-  configuration {
-    execute_command_configuration {
-      kms_key_id = aws_kms_key.demo.arn
-      logging    = "OVERRIDE"
-
-      log_configuration {
-        cloud_watch_encryption_enabled = true
-        cloud_watch_log_group_name     = aws_cloudwatch_log_group.cluster.name
-      }
-    }
-  }
+module "cluster" {
+  source       = "./modules/ecs/cluster"
+  cluster_name = var.fargate_project_name
 }
 
 ####################################################################
-# ECR Repo (push the frontend and backend docker images here)
+# ECR Repos (push the client and server docker images)
 ####################################################################
+variable "ecr_repos" {
+  type    = set(string)
+  default = ["client", "server"]
+}
+
 resource "aws_ecr_repository" "main" {
-  name                 = var.fargate_project_name
+  for_each             = var.ecr_repos
+  name                 = "${var.fargate_project_name}-${each.value}"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {
