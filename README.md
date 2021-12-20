@@ -1,6 +1,6 @@
 # Project Title
 
-AWS Fargate infrastructure running a simple site with a nodejs backend
+AWS Fargate infrastructure running a simple client site with a nodejs server
 
 ## Getting Started
 

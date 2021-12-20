@@ -13,7 +13,7 @@ app.get("/getData", (req, res) => {
   console.log('Called path /getData');
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.send({ msg: 'Hi from the Node Backend!' });
+  res.send({ msg: 'Hi from the Node Server!' });
 });
 
 app.listen(PORT, HOST);
