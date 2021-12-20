@@ -16,6 +16,8 @@ The things you need before installing the software.
 
 ### Installation
 
+> Run the project locally
+
 ```
 // Client
 $ cd client
@@ -30,7 +32,7 @@ $ node server.js
 
 ## Deployment
 
-> Create the AWS infrastructure that will run the client and server containers.
+> Create the AWS infrastructure to run the client and server containers with Fargate.
 
 Open 3 terminals and cd into the client, server, and infrastructure folders.
 
@@ -67,9 +69,12 @@ $ terraform apply
 
 Some useful features and ways to expand this demo project
 
+* Add a VPC module
+* Create an ALB to remove the need to use public IP addresses
+* Have containers run in private subnets
+* Restrict node sg to only allow 3000 inbound from vue-client sg
 * GitHub Actions for CI/CD Deployments when changes are pushed to the client or server folders
 * AWS Monitoring dashboard for Fargate containers
 * AWS Monitoring alarms and notifications for Fargate containers
-* Create an ALB to remove the need to use public IP addresses
 * Write automation scripts with Python or Go to assist with the Deployment process
 * Add auto-scaling to Fargate Services
