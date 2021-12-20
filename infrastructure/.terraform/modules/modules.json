@@ -1,1 +1,1 @@
-{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"frontend","Source":"./modules/ecs-fargate","Dir":"modules/ecs-fargate"}]}
+{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"frontend","Source":"./modules/ecs-fargate","Dir":"modules/ecs-fargate"},{"Key":"backend","Source":"./modules/ecs-fargate","Dir":"modules/ecs-fargate"}]}

@@ -18,8 +18,10 @@ export default {
     };
   },
   mounted() {
+    // Update this the node fargate task network public ip address
+    const node_public_ip_address = "localhost"
     axios
-      .get(`http://localhost:3000/getData`)
+      .get(`http://${node_public_ip_address}:3000/getData`)
       .then((resp) => resp.data)
       .then((data) => {
         this.msg = data.msg;

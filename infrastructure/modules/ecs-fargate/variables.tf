@@ -10,15 +10,11 @@ variable "container_port" {
     type = number
 }
 
-variable "container_definitions" {
-    type = string
-}
-
 variable "execution_role_arn" {
     type = string
 }
 
-variable "cluster_name" {
+variable "cluster_arn" {
     type = string
 }
 
@@ -28,5 +24,9 @@ variable "desired_count" {
 }
 
 variable "aws_lb_target_group_arn" {
+    type = string
+}
+
+variable "ecr_image_tag" {
     type = string
 }
