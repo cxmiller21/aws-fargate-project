@@ -3,13 +3,10 @@ variable "fargate_project_name" {
   default = "aws-fargate-project"
 }
 
-# Modify these variables with your VPC and Subnet ID
-variable "vpc_id" {
-  type    = string
-  default = ""
+variable "vpc_cidr" {
+  default = "10.0.0.0/16"
 }
 
-variable "subnet_id" {
-  type    = string
-  default = ""
+variable "public_subnet_1_cidr" {
+  default = "10.0.1.0/24"
 }

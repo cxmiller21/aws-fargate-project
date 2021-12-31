@@ -22,10 +22,10 @@ module "client_service" {
   cluster_arn             = module.cluster.cluster_arn
   ecs_task_definition_arn = module.client_task_definition[0].task_arn
   desired_count           = 1
-  subnets                 = [var.subnet_id]
+  subnets                 = [aws_subnet.public.id]
 
   # Security Group Variables
-  vpc_id                 = var.vpc_id
+  vpc_id                 = aws_vpc.main.id
   inbound_container_port = 80
 }
 

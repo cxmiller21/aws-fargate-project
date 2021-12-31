@@ -45,3 +45,47 @@ resource "aws_ecr_repository" "main" {
     scan_on_push = true
   }
 }
+
+####################################################################
+# VPC + Subnets
+####################################################################
+resource "aws_vpc" "main" {
+  cidr_block       = var.vpc_cidr
+  instance_tenancy = "default"
+
+  tags = {
+    Name = "aws-fargate-project-vpc"
+  }
+}
+
+resource "aws_subnet" "public" {
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = var.public_subnet_1_cidr
+  map_public_ip_on_launch = true
+  availability_zone       = "us-east-1a"
+
+  tags = {
+    "Name" = "public-subnet-1"
+  }
+}
+
+resource "aws_internet_gateway" "main" {
+  vpc_id = aws_vpc.main.id
+  tags = {
+    "Name" = "VPC-IGW"
+  }
+}
+
+resource "aws_route" "vpc_igw_route" {
+  route_table_id         = aws_route_table.public.id
+  gateway_id             = aws_internet_gateway.main.id
+  destination_cidr_block = "0.0.0.0/0"
+}
+
+resource "aws_route_table" "public" {
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name = "public-route-table"
+  }
+}
