@@ -1,10 +1,5 @@
 variable "client_service_name" {
   type    = string
-  default = "vue-client"
-}
-
-variable "client_ecr_identifier" {
-  type    = string
   default = "client"
 }
 
@@ -41,7 +36,7 @@ module "client_task_definition" {
   task_definition_family = var.client_service_name
   host_port              = 80
   container_port         = 80
-  ecr_repo               = "${var.fargate_project_name}-${var.client_ecr_identifier}"
-  ecr_image_tag          = var.client_ecr_identifier
+  ecr_repo               = "${var.fargate_project_name}-${var.client_service_name}"
+  ecr_image_tag          = var.client_service_name
   execution_role_arn     = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/ecsTaskExecutionRole"
 }

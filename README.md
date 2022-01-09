@@ -58,7 +58,7 @@ $ npm run push:image
 // 7. (Infrastructure folder) After the image is pushed to ECR, set the client.tf "node_task_ip_address_updated" variable to true
 $ terraform apply
 
-// 8. Open a new tab with the 'vue-client' task's Public IP address and you should see the vue app with a message from the node server.
+// 8. Open a new tab with the 'client' task's Public IP address and you should see the vue app with a message from the node server.
 ```
 
 ### Branches
@@ -72,7 +72,7 @@ Some useful features and ways to expand this demo project
 * Add a VPC module
 * Create an ALB to remove the need to use public IP addresses
 * Have containers run in private subnets
-* Restrict node sg to only allow 3000 inbound from vue-client sg
+* Restrict node sg to only allow 3000 inbound from client sg
 * GitHub Actions for CI/CD Deployments when changes are pushed to the client or server folders
 * AWS Monitoring dashboard for Fargate containers
 * AWS Monitoring alarms and notifications for Fargate containers

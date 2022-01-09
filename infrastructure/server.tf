@@ -1,10 +1,5 @@
 variable "server_service_name" {
   type    = string
-  default = "node-server"
-}
-
-variable "server_ecr_identifier" {
-  type    = string
   default = "server"
 }
 
@@ -34,7 +29,7 @@ module "server_task_definition" {
   task_definition_family = var.server_service_name
   host_port              = 3000
   container_port         = 3000
-  ecr_repo               = "${var.fargate_project_name}-${var.server_ecr_identifier}"
-  ecr_image_tag          = var.server_ecr_identifier
+  ecr_repo               = "${var.fargate_project_name}-${var.server_service_name}"
+  ecr_image_tag          = var.server_service_name
   execution_role_arn     = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/ecsTaskExecutionRole"
 }
