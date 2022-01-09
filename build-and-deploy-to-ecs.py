@@ -81,7 +81,7 @@ if __name__ == "__main__":
     region = args.region
     app = args.app
     ecr_root=f'{args.aws_acct_id}.dkr.ecr.us-east-1.amazonaws.com'
-    ecr_repo = f'{ecr_root}/{args.base_ecr_repo}-{app}'
+    ecr_repo = f'{ecr_root}/{args.base_ecr_repo}-{app}:latest'
     docker_file_path = f'./{app}/Dockerfile' # this could be an arg
     
     login_to_ecr(region, ecr_root)
